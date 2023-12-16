@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk
+from mainMenu import main_menu
 
 
 
@@ -16,6 +16,10 @@ main_frame  = tk.Frame(window, width= WINDOW_WIDTH, height = 500,  borderwidth=3
 footer_frame  = tk.Frame(window, width= WINDOW_WIDTH, height = 100,  borderwidth=3, relief="solid" )
 
 
+header_frame.pack_propagate(False)
+main_frame.pack_propagate(False)  
+footer_frame.pack_propagate(False)
+main_menu(main_frame)
 
 
 
