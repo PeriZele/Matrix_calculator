@@ -1,5 +1,6 @@
 import tkinter as tk
 from singleInput import single_input
+from multiInput import display_multi_input
 
 
 #functions
@@ -10,7 +11,6 @@ def handle_main_menu_click():
     display_main_menu()
 
 
-
 # Display main menu
 def display_main_menu():
 
@@ -19,7 +19,7 @@ def display_main_menu():
 
     # menu buttons
     single_operaion_button = tk.Button(main_menu_frame, bd=1, text="Single Matrix Operation",   command=handle_single_operation_click)
-    multi_operaion_button = tk.Button(main_menu_frame, bd=1, text="Mulitple Matrix Operation")
+    multi_operaion_button = tk.Button(main_menu_frame, bd=1, text="Mulitple Matrix Operation", command=handle_multi_operation_click)
 
     # menu frame to keep original size
     main_menu_frame.pack_propagate(0)
@@ -41,14 +41,10 @@ def remove_current_view():
 def handle_single_operation_click():
     remove_current_view()
     single_input(main_frame)
-
-
-
-
-
-
-
-
+def handle_multi_operation_click():
+    remove_current_view()
+    display_multi_input(main_frame)
+    
 
 
 
