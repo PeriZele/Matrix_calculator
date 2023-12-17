@@ -25,10 +25,10 @@ def display_single_operations_menu():
     single_operations_menu_frame = tk.Frame(single_input_frame)
 
     determinant_button = tk.Button(single_operations_menu_frame, text="Determinant", command= lambda: handle_determinant_click(get_matrix_values(matrix)))
-    inverse_button = tk.Button(single_operations_menu_frame, text="Inverse")
-    rank_button = tk.Button(single_operations_menu_frame, text="Rank")
-    transpose_button = tk.Button(single_operations_menu_frame, text="Transpose")
-    gauss_button = tk.Button(single_operations_menu_frame, text="Gauss-Jordan")
+    inverse_button = tk.Button(single_operations_menu_frame, text="Inverse", command= lambda: handle_inverse_click(get_matrix_values(matrix)))
+    rank_button = tk.Button(single_operations_menu_frame, text="Rank", command= lambda: handle_rank_click(get_matrix_values(matrix)))
+    transpose_button = tk.Button(single_operations_menu_frame, text="Transpose", command= lambda: handle_transpose_click(get_matrix_values(matrix)))
+    gauss_button = tk.Button(single_operations_menu_frame, text="Gauss-Jordan", command= lambda: handle_gauss_click(get_matrix_values(matrix)))
 
     single_operations_menu_frame.pack(pady="30")
 
@@ -38,7 +38,7 @@ def display_single_operations_menu():
     transpose_button.pack(side="left", padx="5")
     gauss_button.pack(side="left", padx="5")
 
-
+# validate the dimensions input
 def validate_dimensions(r, c):
     try:
         if int(r) > 1 and int(r) < 10 and int(c) > 1 and int(c) < 10:
@@ -48,46 +48,93 @@ def validate_dimensions(r, c):
     except:
         return False
         
+
+# validate the matrix itself
+def validate_matrix(matrix_values):
+    for row in matrix_values:
+        for element in row:
+            try:
+                int(element)
+            except:
+                return False
+    return True
+
+
+
 # Single operatoin handlers
 def handle_determinant_click(matrix_values):
     global validation_label
-    if len(matrix_values) == len(matrix_values[0]):
-        print(matrix_values)
-        #do the calculations
+    if validate_matrix(matrix_values):
+        if len(matrix_values) == len(matrix_values[0]):
+            print(matrix_values)
+            #do the calculations
+            clear_input_frame()
+            result_label = tk.Label(single_input_frame, text=matrix_values)
+            result_label.pack()
+        else:
+            if not validation_label:
+                validation_label = tk.Label(single_input_frame, text="Determinant calculation only applicable with square matrix") 
+                validation_label.pack()
+            else:
+                validation_label.config(text="Determinant calculation only applicable with square matrix")
+    else:
+        if not validation_label:
+                validation_label = tk.Label(single_input_frame, text="Invalid Input") 
+                validation_label.pack()
+        else:
+                validation_label.config(text="Invalid input")
+def handle_inverse_click(matrix_values):
+    global validation_label
+    if validate_matrix(matrix_values):
+        # Perform calculations for inverse
         clear_input_frame()
-        result_label = tk.Label(single_input_frame, text=matrix_values)
+        result_label = tk.Label(single_input_frame, text="Inverse Matrix Result")
         result_label.pack()
     else:
         if not validation_label:
-            validation_label = tk.Label(single_input_frame, text="Determinant calculation only applicable with square matrix") 
-            validation_label.pack()
+                validation_label = tk.Label(single_input_frame, text="Invalid Input") 
+                validation_label.pack()
         else:
-            validation_label.config(text="Determinant calculation only applicable with square matrix")
-
-def handle_inverse_click(matrix_values):
-    print(matrix_values)
-    # Perform calculations for inverse
-    clear_input_frame()
-    result_label = tk.Label(single_input_frame, text="Inverse Matrix Result")
-    result_label.pack()
+                validation_label.config(text="Invalid input")
 def handle_rank_click(matrix_values):
-    print(matrix_values)
-    # Perform calculations for rank
-    clear_input_frame()
-    result_label = tk.Label(single_input_frame, text="Rank Result")
-    result_label.pack()
+    global validation_label
+    if validate_matrix(matrix_values):
+        # Perform calculations for rank
+        clear_input_frame()
+        result_label = tk.Label(single_input_frame, text="Rank Result")
+        result_label.pack()
+    else:
+        if not validation_label:
+                validation_label = tk.Label(single_input_frame, text="Invalid Input") 
+                validation_label.pack()
+        else:
+                validation_label.config(text="Invalid input")
 def handle_transpose_click(matrix_values):
-    print(matrix_values)
-    # Perform calculations for transpose
-    clear_input_frame()
-    result_label = tk.Label(single_input_frame, text="Transpose Result")
-    result_label.pack()
-def handle_gauss_jordan_click(matrix_values):
-    print(matrix_values)
-    # Perform calculations for Gauss-Jordan elimination
-    clear_input_frame()
-    result_label = tk.Label(single_input_frame, text="Gauss-Jordan Result")
-    result_label.pack()
+    global validation_label
+    if validate_matrix(matrix_values):
+        # Perform calculations for transpose
+        clear_input_frame()
+        result_label = tk.Label(single_input_frame, text="Transpose Result")
+        result_label.pack()
+    else:
+        if not validation_label:
+                validation_label = tk.Label(single_input_frame, text="Invalid Input") 
+                validation_label.pack()
+        else:
+                validation_label.config(text="Invalid input")
+def handle_gauss_click(matrix_values):
+    global validation_label
+    if validate_matrix(matrix_values):
+        # Perform calculations for Gauss-Jordan elimination
+        clear_input_frame()
+        result_label = tk.Label(single_input_frame, text="Gauss-Jordan Result")
+        result_label.pack()
+    else:
+        if not validation_label:
+                validation_label = tk.Label(single_input_frame, text="Invalid Input") 
+                validation_label.pack()
+        else:
+                validation_label.config(text="Invalid input")
 
 def single_input(master):
 
