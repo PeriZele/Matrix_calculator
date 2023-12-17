@@ -10,6 +10,7 @@ def handle_main_menu_click():
     display_main_menu()
 
 
+
 # Display main menu
 def display_main_menu():
 
