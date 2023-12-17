@@ -6,13 +6,33 @@ def clear_input_frame():
 
 def handle_input_button_click(r, c):
     clear_input_frame()
-    print(r,c)
+    submit_button = tk.Button(single_input_frame, text="Submit")
+    submit_button.pack(side="right")
     create_matrix(r, c)
+    display_single_operations_menu()
 
+def display_single_operations_menu():
+
+    single_operations_menu_frame = tk.Frame(single_input_frame)
+
+    determinant_button = tk.Button(single_operations_menu_frame, text="Determinant")
+    inverse_button = tk.Button(single_operations_menu_frame, text="Inverse")
+    rank_button = tk.Button(single_operations_menu_frame, text="Rank")
+    transpose_button = tk.Button(single_operations_menu_frame, text="Transpose")
+    gauss_button = tk.Button(single_operations_menu_frame, text="Gauss-Jordan")
+
+    single_operations_menu_frame.pack(pady="30")
+
+    determinant_button.pack(side="left", padx="5")
+    inverse_button.pack(side="left", padx="5")
+    rank_button.pack(side="left", padx="5" )
+    transpose_button.pack(side="left", padx="5")
+    gauss_button.pack(side="left", padx="5")
+    
 
 def single_input(master):
 
-    global single_input_frame, input_x, input_y
+    global single_input_frame
     single_input_frame = tk.Frame(master, width=500, height=100, bd=3, relief="solid")
 
     input_label = tk.Label(single_input_frame, text="Dimensions: ")
