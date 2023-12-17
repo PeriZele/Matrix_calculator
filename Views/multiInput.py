@@ -15,7 +15,7 @@ def handle_input_button_click(r1, c1, r2, c2):
     if validate_dimensions(r1, c1, r2, c2):
         clear_input_frame()
         create_matrices(int(r1), int(c1), int(r2), int(c2))
-        #display_single_operations_menu()
+        display_multi_operations_menu()
     else:
         if not validation_label:
             validation_label = tk.Label(multi_input_frame, text="Invalid input") 
@@ -46,11 +46,8 @@ def create_matrix_entry(master, rows, columns):
             row.append(entry)
         matrix.append(row)
     return matrix
-
-
 def get_matrix_values(matrix_1, matrix_2):
     return [[[entry.get() for entry in row] for row in matrix_1], [[entry.get() for entry in row] for row in matrix_2]]
-
 def create_matrices(r1, c1, r2, c2):
     matrix_frame_1 = tk.Frame(multi_input_frame)
     matrix_frame_2 = tk.Frame(multi_input_frame)
@@ -63,7 +60,38 @@ def create_matrices(r1, c1, r2, c2):
     matrix_1 = create_matrix_entry(matrix_frame_1, r1, c1)
     matrix_2 = create_matrix_entry(matrix_frame_2, r2, c2)
 
+def display_multi_operations_menu():
 
+
+    multi_operations_menu_frame = tk.Frame(multi_input_frame)
+
+    add_button = tk.Button(multi_operations_menu_frame, text="+") #command= lambda: handle_determinant_click(get_matrix_values(matrix)))
+    substract_button = tk.Button(multi_operations_menu_frame, text="-") #command= lambda: handle_determinant_click(get_matrix_values(matrix)))
+    multiply_button = tk.Button(multi_operations_menu_frame, text="X") #command= lambda: handle_determinant_click(get_matrix_values(matrix)))
+   
+    multi_operations_menu_frame.pack(pady="30")
+
+    add_button.pack(side="left", padx="5")
+    substract_button.pack(side="left", padx="5")
+    multiply_button.pack(side="left", padx="5")
+   
+
+def validate_matrix(matrix_1, matrix_2):
+    for row in matrix_1:
+        for element in row:
+            try:
+                int(element)
+            except:
+                return False
+            
+    for row in matrix_2:
+        for element in row:
+            try:
+                int(element)
+            except:
+                return False
+            
+    return True
 
 
 def display_multi_input(master):
