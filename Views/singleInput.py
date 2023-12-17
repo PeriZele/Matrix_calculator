@@ -4,12 +4,23 @@ def clear_input_frame():
     for widget in single_input_frame.winfo_children():
         widget.destroy()
 
+
+validation_label = None
 def handle_input_button_click(r, c):
-    clear_input_frame()
-    create_matrix(r, c)
-    display_single_operations_menu()
+    global validation_label
+    if validate_dimensions(r, c):
+        clear_input_frame()
+        create_matrix(int(r), int(c))
+        display_single_operations_menu()
+    else:
+        if not validation_label:
+            validation_label = tk.Label(single_input_frame, text="Invalid input") 
+            validation_label.pack()
+        else:
+            validation_label.config(text="Invalid Input")
 
 def display_single_operations_menu():
+
 
     single_operations_menu_frame = tk.Frame(single_input_frame)
 
@@ -26,13 +37,32 @@ def display_single_operations_menu():
     rank_button.pack(side="left", padx="5" )
     transpose_button.pack(side="left", padx="5")
     gauss_button.pack(side="left", padx="5")
-    
+
+
+def validate_dimensions(r, c):
+    try:
+        if int(r) > 1 and int(r) < 10 and int(c) > 1 and int(c) < 10:
+            return True
+        else:
+            return False
+    except:
+        return False
+        
+# Single operatoin handlers
 def handle_determinant_click(matrix_values):
-    print(matrix_values)
-    #do the calculations
-    clear_input_frame()
-    result_label = tk.Label(single_input_frame, text=matrix_values)
-    result_label.pack()
+    global validation_label
+    if len(matrix_values) == len(matrix_values[0]):
+        print(matrix_values)
+        #do the calculations
+        clear_input_frame()
+        result_label = tk.Label(single_input_frame, text=matrix_values)
+        result_label.pack()
+    else:
+        if not validation_label:
+            validation_label = tk.Label(single_input_frame, text="Determinant calculation only applicable with square matrix") 
+            validation_label.pack()
+        else:
+            validation_label.config(text="Determinant calculation only applicable with square matrix")
 
 def handle_inverse_click(matrix_values):
     print(matrix_values)
@@ -40,25 +70,18 @@ def handle_inverse_click(matrix_values):
     clear_input_frame()
     result_label = tk.Label(single_input_frame, text="Inverse Matrix Result")
     result_label.pack()
-
-
 def handle_rank_click(matrix_values):
     print(matrix_values)
     # Perform calculations for rank
-    # ...
     clear_input_frame()
     result_label = tk.Label(single_input_frame, text="Rank Result")
     result_label.pack()
-
-
 def handle_transpose_click(matrix_values):
     print(matrix_values)
     # Perform calculations for transpose
     clear_input_frame()
     result_label = tk.Label(single_input_frame, text="Transpose Result")
     result_label.pack()
-
-
 def handle_gauss_jordan_click(matrix_values):
     print(matrix_values)
     # Perform calculations for Gauss-Jordan elimination
@@ -78,7 +101,7 @@ def single_input(master):
     input_y = tk.Entry(single_input_frame ,bd=1)
 
 
-    input_btn = tk.Button(single_input_frame, text="Next", command=lambda: handle_input_button_click(int(input_x.get()), int(input_y.get())))
+    input_btn = tk.Button(single_input_frame, text="Next", command=lambda: handle_input_button_click(input_x.get(), input_y.get()))
 
     single_input_frame.place(relx=0.5, rely=0.5, anchor='center')
     input_label.pack(side="left")
