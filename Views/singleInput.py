@@ -4,13 +4,15 @@ def clear_input_frame():
     for widget in single_input_frame.winfo_children():
         widget.destroy()
 
-def handle_input_button_click():
+def handle_input_button_click(r, c):
     clear_input_frame()
-    create_matrix()
+    print(r,c)
+    create_matrix(r, c)
+
 
 def single_input(master):
 
-    global single_input_frame
+    global single_input_frame, input_x, input_y
     single_input_frame = tk.Frame(master, width=500, height=100, bd=3, relief="solid")
 
     input_label = tk.Label(single_input_frame, text="Dimensions: ")
@@ -19,7 +21,8 @@ def single_input(master):
     input_x = tk.Entry(single_input_frame ,bd=1)
     input_y = tk.Entry(single_input_frame ,bd=1)
 
-    input_btn = tk.Button(single_input_frame, text="Next", command=handle_input_button_click)
+
+    input_btn = tk.Button(single_input_frame, text="Next", command=lambda: handle_input_button_click(int(input_x.get()), int(input_y.get())))
 
     single_input_frame.place(relx=0.5, rely=0.5, anchor='center')
     input_label.pack(side="left")
@@ -42,15 +45,14 @@ def create_matrix_entry(master, rows, columns):
     return matrix
 
 
-def create_matrix():
-    rows = 3
-    columns = 3
-
+def create_matrix(r, c):
     matrix_frame = tk.Frame(single_input_frame)
     matrix_frame.pack()
 
     # Create a 3x3 matrix of entry fields
-    matrix = create_matrix_entry(matrix_frame, rows, columns)
+    matrix = create_matrix_entry(matrix_frame, r, c)
+
+
 
 
 
