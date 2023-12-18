@@ -2,6 +2,7 @@ import tkinter as tk
 import sys
 sys.path.append('/Users/perneszmatyas/Documents/Coding/se_project/Matrix_calculator')
 from Functions import functions
+import numpy as np
 
 
 validation_label = None
@@ -130,9 +131,9 @@ def handle_transpose_click(matrix_values):
 def handle_gauss_click(matrix_values):
     global validation_label
     if validate_matrix(matrix_values):
-        # Perform calculations for Gauss-Jordan elimination
+        result_value = functions.calcGauss(matrix_values)
         clear_input_frame()
-        result_label = tk.Label(single_input_frame, text="Gauss-Jordan Result")
+        result_label = tk.Label(single_input_frame, text=result_value)
         result_label.pack()
     else:
         if not validation_label:
