@@ -28,10 +28,28 @@ def calcTranspose(matrix):
     return np.matrix.transpose(np.matrix(matrix))
     
     
+
+
+def calcMultiply(matrix_1, matrix_2):
+    try:
+        return np.matmul(matrix_1,matrix_2)
+    except:
+        return np.matmul(matrix_2,matrix_1)
+
+
+
 matrix = [
     [3, 7, 2],
     [1, 4, 8],
     [6, 9, 3]
 ]
+
+matrix2 = [
+    [3, 7, 2, 5],
+    [1, 4, 8, 6],
+    [6, 9, 4, 9]
+]
+
+
 
 
