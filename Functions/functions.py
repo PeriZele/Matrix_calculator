@@ -36,7 +36,12 @@ def calcMultiply(matrix_1, matrix_2):
     except:
         return np.matmul(matrix_2,matrix_1)
 
+def calcAdd(matrix_1, matrix_2):
+    for i, row in enumerate(matrix_1):
+        for k, element in enumerate(row):
+            matrix_1[i][k] += matrix_2[i][k]
 
+    return np.matrix(matrix_1)
 
 matrix = [
     [3, 7, 2],
@@ -45,11 +50,13 @@ matrix = [
 ]
 
 matrix2 = [
-    [3, 7, 2, 5],
-    [1, 4, 8, 6],
-    [6, 9, 4, 9]
+    [3, 7, 2],
+    [1, 4, 8],
+    [6, 9, 4]
 ]
 
+
+calcAdd(matrix, matrix2)
 
 
 
