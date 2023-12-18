@@ -93,7 +93,7 @@ def handle_inverse_click(matrix_values):
     global validation_label
     if validate_matrix(matrix_values):
         if len(matrix_values) == len(matrix_values[0]):
-            result_value = functions.calcDeterminant(matrix_values)
+            result_value = functions.calcInverse(matrix_values)
             clear_input_frame()
             result_label = tk.Label(single_input_frame, text=result_value)
             result_label.pack()
