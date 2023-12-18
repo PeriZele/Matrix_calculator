@@ -24,11 +24,14 @@ def calcRank(matrix):
     return np.linalg.matrix_rank(np.matrix(matrix))
 
 
-
+def calcTranspose(matrix):
+    return np.matrix.transpose(np.matrix(matrix))
+    
+    
 matrix = [
     [3, 7, 2],
     [1, 4, 8],
     [6, 9, 3]
 ]
 
-calcRank(matrix)
+

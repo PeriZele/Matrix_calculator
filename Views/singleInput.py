@@ -125,9 +125,9 @@ def handle_rank_click(matrix_values):
 def handle_transpose_click(matrix_values):
     global validation_label
     if validate_matrix(matrix_values):
-        # Perform calculations for transpose
+        result_value = functions.calcTranspose(matrix_values)
         clear_input_frame()
-        result_label = tk.Label(single_input_frame, text="Transpose Result")
+        result_label = tk.Label(single_input_frame, text=result_value)
         result_label.pack()
     else:
         if not validation_label:
