@@ -92,10 +92,17 @@ def handle_determinant_click(matrix_values):
 def handle_inverse_click(matrix_values):
     global validation_label
     if validate_matrix(matrix_values):
-        # Perform calculations for inverse
-        clear_input_frame()
-        result_label = tk.Label(single_input_frame, text="Inverse Matrix Result")
-        result_label.pack()
+        if len(matrix_values) == len(matrix_values[0]):
+            result_value = functions.calcDeterminant(matrix_values)
+            clear_input_frame()
+            result_label = tk.Label(single_input_frame, text=result_value)
+            result_label.pack()
+        else:
+            if not validation_label:
+                validation_label = tk.Label(single_input_frame, text="Inverse calculation only applicable with square matrix") 
+                validation_label.pack()
+            else:
+                validation_label.config(text="Inverse calculation only applicable with square matrix")
     else:
         if not validation_label:
                 validation_label = tk.Label(single_input_frame, text="Invalid Input") 
