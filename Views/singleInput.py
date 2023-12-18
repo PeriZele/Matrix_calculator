@@ -1,4 +1,8 @@
 import tkinter as tk
+import sys
+sys.path.append('/Users/perneszmatyas/Documents/Coding/se_project/Matrix_calculator')
+from Functions import functions
+
 
 validation_label = None
 def clear_input_frame():
@@ -68,10 +72,9 @@ def handle_determinant_click(matrix_values):
     global validation_label
     if validate_matrix(matrix_values):
         if len(matrix_values) == len(matrix_values[0]):
-            print(matrix_values)
-            #do the calculations
+            result_value = functions.calcDeterminant(matrix_values)
             clear_input_frame()
-            result_label = tk.Label(single_input_frame, text=matrix_values)
+            result_label = tk.Label(single_input_frame, text=result_value)
             result_label.pack()
         else:
             if not validation_label:
@@ -175,7 +178,7 @@ def create_matrix_entry(master, rows, columns):
 
 
 def get_matrix_values(matrix):
-    return [[entry.get() for entry in row] for row in matrix]
+    return [[float(entry.get()) for entry in row] for row in matrix]
 
 def create_matrix(r, c):
     matrix_frame = tk.Frame(single_input_frame)
