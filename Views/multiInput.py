@@ -1,4 +1,7 @@
 import tkinter as tk
+import sys
+sys.path.append('/Users/perneszmatyas/Documents/Coding/se_project/Matrix_calculator')
+from Functions import functions
 
 
 
@@ -49,7 +52,7 @@ def create_matrix_entry(master, rows, columns):
         matrix.append(row)
     return matrix
 def get_matrix_values(matrix_1, matrix_2):
-    return [[[entry.get() for entry in row] for row in matrix_1], [[entry.get() for entry in row] for row in matrix_2]]
+    return [[[int(entry.get()) for entry in row] for row in matrix_1], [[int(entry.get()) for entry in row] for row in matrix_2]]
 def create_matrices(r1, c1, r2, c2):
     global matrix_1
     global matrix_2
@@ -124,9 +127,9 @@ def handle_multiply_click(matrix_1, matrix_2):
     c2 = len(matrix_2[0])
     if validate_matrices(matrix_1, matrix_2):
         if r1 == r2 or r1 == c2 or c1 == r2 or c1 == c2:
-            #do the calculations
+            result_value = functions.calcMultiply(matrix_1, matrix_2)
             clear_input_frame()
-            result_label = tk.Label(multi_input_frame, text="Multiply")
+            result_label = tk.Label(multi_input_frame, text=result_value)
             result_label.pack()
         else:
             if not validation_label:
