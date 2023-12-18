@@ -1,11 +1,13 @@
 import tkinter as tk
 
+validation_label = None
 def clear_input_frame():
+    global validation_label
     for widget in single_input_frame.winfo_children():
         widget.destroy()
+    validation_label = None
 
 
-validation_label = None
 def handle_input_button_click(r, c):
     global validation_label
     if validate_dimensions(r, c):

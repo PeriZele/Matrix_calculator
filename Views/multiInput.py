@@ -2,13 +2,15 @@ import tkinter as tk
 
 
 
+validation_label = None
 
 def clear_input_frame():
+    global validation_label
     for widget in multi_input_frame.winfo_children():
         widget.destroy()
+    validation_label = None
 
 
-validation_label = None
 def handle_input_button_click(r1, c1, r2, c2):
     global validation_label
     print(r1, c1, r2, c2)
@@ -49,6 +51,8 @@ def create_matrix_entry(master, rows, columns):
 def get_matrix_values(matrix_1, matrix_2):
     return [[[entry.get() for entry in row] for row in matrix_1], [[entry.get() for entry in row] for row in matrix_2]]
 def create_matrices(r1, c1, r2, c2):
+    global matrix_1
+    global matrix_2
     matrix_frame_1 = tk.Frame(multi_input_frame)
     matrix_frame_2 = tk.Frame(multi_input_frame)
 
@@ -60,23 +64,101 @@ def create_matrices(r1, c1, r2, c2):
     matrix_1 = create_matrix_entry(matrix_frame_1, r1, c1)
     matrix_2 = create_matrix_entry(matrix_frame_2, r2, c2)
 
+
+def handle_add_click(matrix_1, matrix_2):
+    global validation_label
+    r1 = len(matrix_1)
+    c1 = len(matrix_1[0])
+    r2 = len(matrix_2)
+    c2 = len(matrix_2[0])
+    if validate_matrices(matrix_1, matrix_2):
+        if r1 == r2 and c1 == c2:
+            #do the calculations
+            clear_input_frame()
+            result_label = tk.Label(multi_input_frame, text="Addition")
+            result_label.pack()
+        else:
+            if not validation_label:
+                validation_label = tk.Label(multi_input_frame, text="Invalid matrix sizes") 
+                validation_label.pack()
+            else:
+                validation_label.config(text="Invalid matrix sizes")
+    else:
+        if not validation_label:
+                validation_label = tk.Label(multi_input_frame, text="Invalid input") 
+                validation_label.pack()
+        else:
+                validation_label.config(text="Invalid input")
+
+def handle_substract_click(matrix_1, matrix_2):
+    global validation_label
+    r1 = len(matrix_1)
+    c1 = len(matrix_1[0])
+    r2 = len(matrix_2)
+    c2 = len(matrix_2[0])
+    if validate_matrices(matrix_1, matrix_2):
+        if r1 == r2 and c1 == c2:
+            #do the calculations
+            clear_input_frame()
+            result_label = tk.Label(multi_input_frame, text="Substract")
+            result_label.pack()
+        else:
+            if not validation_label:
+                validation_label = tk.Label(multi_input_frame, text="Invalid matrix sizes") 
+                validation_label.pack()
+            else:
+                validation_label.config(text="Invalid matrix sizes")
+    else:
+        if not validation_label:
+                validation_label = tk.Label(multi_input_frame, text="Invalid input") 
+                validation_label.pack()
+        else:
+                validation_label.config(text="Invalid input")
+
+
+def handle_multiply_click(matrix_1, matrix_2):
+    global validation_label
+    r1 = len(matrix_1)
+    c1 = len(matrix_1[0])
+    r2 = len(matrix_2)
+    c2 = len(matrix_2[0])
+    if validate_matrices(matrix_1, matrix_2):
+        if r1 == r2 or r1 == c2 or c1 == r2 or c1 == c2:
+            #do the calculations
+            clear_input_frame()
+            result_label = tk.Label(multi_input_frame, text="Multiply")
+            result_label.pack()
+        else:
+            if not validation_label:
+                validation_label = tk.Label(multi_input_frame, text="Invalid matrix sizes") 
+                validation_label.pack()
+            else:
+                validation_label.config(text="Invalid matrix sizes")
+    else:
+        if not validation_label:
+                validation_label = tk.Label(multi_input_frame, text="Invalid input") 
+                validation_label.pack()
+        else:
+                validation_label.config(text="Invalid input")
+
+
+
 def display_multi_operations_menu():
 
 
     multi_operations_menu_frame = tk.Frame(multi_input_frame)
 
-    add_button = tk.Button(multi_operations_menu_frame, text="+") #command= lambda: handle_determinant_click(get_matrix_values(matrix)))
-    substract_button = tk.Button(multi_operations_menu_frame, text="-") #command= lambda: handle_determinant_click(get_matrix_values(matrix)))
-    multiply_button = tk.Button(multi_operations_menu_frame, text="X") #command= lambda: handle_determinant_click(get_matrix_values(matrix)))
+    add_button = tk.Button(multi_operations_menu_frame, text="+", command= lambda:handle_add_click(get_matrix_values(matrix_1, matrix_2)[0], get_matrix_values(matrix_1, matrix_2)[1]))
+    substract_button = tk.Button(multi_operations_menu_frame, text="-", command= lambda:handle_substract_click(get_matrix_values(matrix_1, matrix_2)[0], get_matrix_values(matrix_1, matrix_2)[1]))
+    multiply_button = tk.Button(multi_operations_menu_frame, text="X", command= lambda:handle_multiply_click(get_matrix_values(matrix_1, matrix_2)[0], get_matrix_values(matrix_1, matrix_2)[1]))
    
     multi_operations_menu_frame.pack(pady="30")
 
     add_button.pack(side="left", padx="5")
     substract_button.pack(side="left", padx="5")
     multiply_button.pack(side="left", padx="5")
-   
-
-def validate_matrix(matrix_1, matrix_2):
+#validate matrix
+def validate_matrices(matrix_1, matrix_2):
     for row in matrix_1:
         for element in row:
             try:
@@ -92,6 +174,8 @@ def validate_matrix(matrix_1, matrix_2):
                 return False
             
     return True
+
+
 
 
 def display_multi_input(master):

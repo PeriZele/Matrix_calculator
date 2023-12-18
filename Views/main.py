@@ -48,7 +48,7 @@ def handle_multi_operation_click():
 
 
 
-
+    
 # window geometry constants
 WINDOW_WIDTH = 900
 WINDOW_HEIGHT = 675
