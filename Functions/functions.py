@@ -43,6 +43,13 @@ def calcAdd(matrix_1, matrix_2):
 
     return np.matrix(matrix_1)
 
+def calcSubstract(matrix_1, matrix_2):
+    for i, row in enumerate(matrix_1):
+        for k, element in enumerate(row):
+            matrix_1[i][k] -= matrix_2[i][k]
+
+    return np.matrix(matrix_1)
+
 matrix = [
     [3, 7, 2],
     [1, 4, 8],

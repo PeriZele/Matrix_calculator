@@ -101,9 +101,9 @@ def handle_substract_click(matrix_1, matrix_2):
     c2 = len(matrix_2[0])
     if validate_matrices(matrix_1, matrix_2):
         if r1 == r2 and c1 == c2:
-            #do the calculations
+            result_value = functions.calcSubstract(matrix_1,matrix_2)
             clear_input_frame()
-            result_label = tk.Label(multi_input_frame, text="Substract")
+            result_label = tk.Label(multi_input_frame, text=result_value)
             result_label.pack()
         else:
             if not validation_label:
