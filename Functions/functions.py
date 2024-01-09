@@ -50,20 +50,8 @@ def calcSubstract(matrix_1, matrix_2):
 
     return np.matrix(matrix_1)
 
-matrix = [
-    [3, 7, 2],
-    [1, 4, 8],
-    [6, 9, 3]
-]
-
-matrix2 = [
-    [3, 7, 2],
-    [1, 4, 8],
-    [6, 9, 4]
-]
 
 
-calcAdd(matrix, matrix2)
 
 
 

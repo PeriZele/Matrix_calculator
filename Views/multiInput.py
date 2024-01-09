@@ -2,6 +2,7 @@ import tkinter as tk
 import sys
 sys.path.append('/Users/perneszmatyas/Documents/Coding/se_project/Matrix_calculator')
 from Functions import functions
+import customtkinter
 
 
 
@@ -183,10 +184,10 @@ def validate_matrices(matrix_1, matrix_2):
 
 def display_multi_input(master):
     global multi_input_frame
-    multi_input_frame = tk.Frame(master, width=500, height=100, bd=3, relief="solid")
+    multi_input_frame = tk.Frame(master, width=500, height=100, bd=1, relief="solid", padx=30, pady=30)
     
-    multi_input_frame_upper = tk.Frame(multi_input_frame,  bd=3, relief="solid")
-    multi_input_frame_lower = tk.Frame(multi_input_frame,  bd=3, relief="solid")
+    multi_input_frame_upper = tk.Frame(multi_input_frame,  bd=1, relief="solid",padx=30, pady=30)
+    multi_input_frame_lower = tk.Frame(multi_input_frame,  bd=1, relief="solid",padx=30, pady=30)
 
 
     input_label_1 = tk.Label(multi_input_frame_upper, text="Matrix 1: ")
@@ -202,7 +203,19 @@ def display_multi_input(master):
     input_y_2 = tk.Entry(multi_input_frame_lower ,bd=1)
 
 
-    input_btn = tk.Button(multi_input_frame, text="Next", command=lambda: handle_input_button_click(input_x_1.get(), input_y_1.get(), input_x_2.get(), input_y_2.get()))
+    input_btn = customtkinter.CTkButton(
+    master= multi_input_frame,
+    command= lambda: handle_input_button_click(input_x_1.get(), input_y_1.get(), input_x_2.get(), input_y_2.get()),
+    text= "Next",
+    text_color="white", 
+    hover= True,
+    hover_color= "#3f98d7",
+    height=40,
+    width= 580,
+    corner_radius=5,
+    border_color= "white", 
+    bg_color="white",
+    fg_color= "#3b8cc6")
 
     multi_input_frame.place(relx=0.5, rely=0.5, anchor='center')
     multi_input_frame_upper.pack()
