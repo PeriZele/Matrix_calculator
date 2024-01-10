@@ -32,7 +32,7 @@ def handle_input_button_click(r1, c1, r2, c2):
 
 def validate_dimensions(r1, c1, r2, c2):
     try:
-        if int(r1) > 1 and int(r1) < 10 and int(c1) > 1 and int(c1) < 10 and int(r2) > 1 and int(r2) < 10 and int(c2) > 1 and int(c2) < 10:
+        if int(r1) > 1 and int(r1) < 10 and int(c1) > 1 and int(c1) < 10 and int(r2) > 1 and int(r2) < 10 and int(c2) > 1 and int(c2) < 10 and c1 and c2:
             return True
         else:
             return False

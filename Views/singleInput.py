@@ -115,7 +115,7 @@ def display_single_operations_menu():
 
 def validate_dimensions(r, c):
     try:
-        if 1 < int(r) < 10 and 1 < int(c) < 10:
+        if 1 < int(r) < 10 and 1 < int(c) < 10 and r and c:
             return True
         else:
             return False
